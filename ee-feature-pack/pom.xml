@@ -4043,6 +4043,19 @@
             </dependency>
 
             <dependency>
+                <groupId>org.jboss.resteasy</groupId>
+                <artifactId>resteasy-tracing-api</artifactId>
+                <version>${version.org.jboss.resteasy.extensions}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>*</groupId>
+                        <artifactId>*</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+
+            <dependency>
                 <groupId>org.jboss.spec.javax.annotation</groupId>
                 <artifactId>jboss-annotations-api_1.3_spec</artifactId>
                 <version>${version.org.jboss.spec.javax.annotation.jboss-annotations-api_1.3_spec}</version>
