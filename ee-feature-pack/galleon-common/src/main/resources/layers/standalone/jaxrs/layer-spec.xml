@@ -4,4 +4,8 @@
         <layer name="web-server"/>
     </dependencies>
     <feature-group name="jaxrs"/>
+    <packages>
+        <!-- Optional tracing API -->
+        <package name="org.jboss.resteasy.resteasy-tracing-api" optional="true"/>
+    </packages>
 </layer-spec>
