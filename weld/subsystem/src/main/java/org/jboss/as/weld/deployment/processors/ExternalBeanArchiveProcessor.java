@@ -120,9 +120,16 @@ public class ExternalBeanArchiveProcessor implements DeploymentUnitProcessor {
         // This set is used for external bean archives with annotated discovery mode
         final Set<AnnotationType> beanDefiningAnnotations = new HashSet<>(deploymentUnit.getAttachment(WeldAttachments.BEAN_DEFINING_ANNOTATIONS));
 
-        final List<DeploymentUnit> deploymentUnits = new ArrayList<DeploymentUnit>();
+        List<DeploymentUnit> subDeployments = deploymentUnit.getAttachmentList(Attachments.SUB_DEPLOYMENTS);
+        List<DeploymentUnit> deploymentUnits = new ArrayList<>(subDeployments.size() + 1);
         deploymentUnits.add(deploymentUnit);
-        deploymentUnits.addAll(deploymentUnit.getAttachmentList(Attachments.SUB_DEPLOYMENTS));
+        deploymentUnits.addAll(subDeployments);
+
+        List<ClassLoader> loaders = new ArrayList<>(deploymentUnits.size() + 1);
+        loaders.add(WildFlySecurityManager.getClassLoaderPrivileged(WeldDeploymentProcessor.class));
+        for (DeploymentUnit unit : deploymentUnits) {
+            loaders.add(unit.getAttachment(Attachments.MODULE).getClassLoader());
+        }
 
         BeansXmlParser parser = BeansXmlParserFactory.getPropertyReplacingParser(deploymentUnit,
                 Utils.getRootDeploymentUnit(deploymentUnit).getAttachment(WeldConfiguration.ATTACHMENT_KEY)
@@ -162,8 +169,7 @@ public class ExternalBeanArchiveProcessor implements DeploymentUnitProcessor {
             }
         }
 
-        final ServiceLoader<ModuleServicesProvider> moduleServicesProviders = ServiceLoader.load(ModuleServicesProvider.class,
-                WildFlySecurityManager.getClassLoaderPrivileged(WeldDeploymentProcessor.class));
+        Iterable<ModuleServicesProvider> moduleServicesProviders = ServiceLoader.load(ModuleServicesProvider.class, new CompositeClassLoader(loaders));
 
         Set<String> skipPrecalculatedJandexModules = getSkipPrecalculatedJandexModules(deploymentUnit);
 
@@ -175,6 +181,7 @@ public class ExternalBeanArchiveProcessor implements DeploymentUnitProcessor {
             if (module == null) {
                 return;
             }
+
             for (DependencySpec dep : module.getDependencies()) {
                 if (!(dep instanceof ModuleDependencySpec)) {
                     continue;
@@ -378,7 +385,7 @@ public class ExternalBeanArchiveProcessor implements DeploymentUnitProcessor {
     }
 
     private boolean hasBeanDefiningAnnotation(ClassInfo classInfo, Set<AnnotationType> beanDefiningAnnotations) {
-        Map<DotName, List<AnnotationInstance>> annotationsMap = classInfo.annotations();
+        Map<DotName, List<AnnotationInstance>> annotationsMap = classInfo.annotationsMap();
         for (AnnotationType beanDefiningAnnotation : beanDefiningAnnotations) {
             List<AnnotationInstance> annotations = annotationsMap.get(beanDefiningAnnotation.getName());
             if (annotations != null) {

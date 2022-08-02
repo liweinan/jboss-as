@@ -19,7 +19,7 @@
         Maintain separation between the artifact id and the version to help prevent
         merge conflicts between commits changing the GA and those changing the V.
         -->
-        <version>27.0.0.Alpha2-SNAPSHOT</version>
+        <version>27.0.0.Alpha4-SNAPSHOT</version>
     </parent>
 
     <!-- ********************************************************************************** -->
@@ -41,6 +41,8 @@
         <bootable-jar-copy-module-files.phase>none</bootable-jar-copy-module-files.phase>
         <!-- Disable the default surefire test execution. -->
         <surefire.default-test.phase>none</surefire.default-test.phase>
+
+        <modular.jdk.testsuite.args>${modular.jdk.args} --add-opens=java.base/javax.crypto=ALL-UNNAMED --add-opens=java.base/sun.security.validator=ALL-UNNAMED --add-opens=java.base/sun.security.x509=ALL-UNNAMED --add-opens=java.base/sun.security.util=ALL-UNNAMED</modular.jdk.testsuite.args>
     </properties>
 
     <dependencies>
@@ -56,23 +58,12 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.sun.mail</groupId>
-            <artifactId>jakarta.mail</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>io.undertow</groupId>
             <artifactId>undertow-core</artifactId>
         </dependency>
         <dependency>
             <groupId>io.undertow</groupId>
             <artifactId>undertow-servlet</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.jboss.spec.javax.annotation</groupId>
-                    <artifactId>jboss-annotations-api_1.2_spec</artifactId>
-                </exclusion>
-            </exclusions>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -81,20 +72,58 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>jakarta.security.enterprise</groupId>
-            <artifactId>jakarta.security.enterprise-api</artifactId>
+            <groupId>jakarta.activation</groupId>
+            <artifactId>jakarta.activation-api</artifactId>
             <scope>test</scope>
         </dependency>
-        <!-- Required for Java 11 -->
         <dependency>
-            <groupId>com.sun.activation</groupId>
-            <artifactId>jakarta.activation</artifactId>
+            <groupId>jakarta.annotation</groupId>
+            <artifactId>jakarta.annotation-api</artifactId>
             <scope>test</scope>
         </dependency>
-        <!-- Required for Java 11 -->
         <dependency>
-            <groupId>javax.jws</groupId>
-            <artifactId>jsr181-api</artifactId>
+            <groupId>jakarta.authentication</groupId>
+            <artifactId>jakarta.authentication-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.authorization</groupId>
+            <artifactId>jakarta.authorization-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.batch</groupId>
+            <artifactId>jakarta.batch-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.ejb</groupId>
+            <artifactId>jakarta.ejb-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.enterprise</groupId>
+            <artifactId>jakarta.enterprise.cdi-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.enterprise.concurrent</groupId>
+            <artifactId>jakarta.enterprise.concurrent-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.faces</groupId>
+            <artifactId>jakarta.faces-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.interceptor</groupId>
+            <artifactId>jakarta.interceptor-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.jms</groupId>
+            <artifactId>jakarta.jms-api</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -108,19 +137,63 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>jakarta.resource</groupId>
+            <artifactId>jakarta.resource-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.security.enterprise</groupId>
+            <artifactId>jakarta.security.enterprise-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.transaction</groupId>
+            <artifactId>jakarta.transaction-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>jakarta.validation</groupId>
             <artifactId>jakarta.validation-api</artifactId>
             <scope>test</scope>
         </dependency>
-        <!-- Required for artemis-commons, just needs to be on the class path -->
         <dependency>
-            <groupId>org.jboss.logmanager</groupId>
-            <artifactId>log4j-jboss-logmanager</artifactId>
+            <groupId>jakarta.websocket</groupId>
+            <artifactId>jakarta.websocket-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.websocket</groupId>
+            <artifactId>jakarta.websocket-client-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.ws.rs</groupId>
+            <artifactId>jakarta.ws.rs-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.xml.bind</groupId>
+            <artifactId>jakarta.xml.bind-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.spec.jakarta.xml.ws</groupId>
+            <artifactId>jboss-jakarta-xml-ws-api_4.0_spec</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.javassist</groupId>
             <artifactId>javassist</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.plexus</groupId>
+            <artifactId>plexus-utils</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -141,12 +214,22 @@
         </dependency>
         <dependency>
             <groupId>org.apache.activemq</groupId>
-            <artifactId>artemis-jms-client</artifactId>
+            <artifactId>artemis-jakarta-client</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.directory.server</groupId>
+            <artifactId>apacheds-test-framework</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -157,6 +240,11 @@
         <dependency>
             <groupId>org.apache.lucene</groupId>
             <artifactId>lucene-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.lucene</groupId>
+            <artifactId>lucene-analyzers-common</artifactId>
             <scope>test</scope>
         </dependency>
         <!-- The following are required at for JAXB on Java 11 -->
@@ -172,11 +260,6 @@
         </dependency>
         <dependency>
             <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-rt-frontend-simple</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-transports-http</artifactId>
             <scope>test</scope>
         </dependency>
@@ -186,6 +269,26 @@
             <scope>test</scope>
         </dependency>
         <!-- End JAXB Java 11 Requirements -->
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-wsdl</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.woodstox</groupId>
+            <artifactId>woodstox-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jaxb</groupId>
+            <artifactId>jaxb-runtime</artifactId>
+            <scope>test</scope>
+        </dependency>
         <!-- A required implementation for the org.jboss.resteasy:resteasy-json-binding-provider -->
         <dependency>
             <groupId>org.eclipse</groupId>
@@ -218,23 +321,53 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.hibernate</groupId>
+            <groupId>org.hibernate.orm</groupId>
             <artifactId>hibernate-core</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.hibernate</groupId>
+            <groupId>org.hibernate.orm</groupId>
             <artifactId>hibernate-envers</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.hibernate</groupId>
+            <groupId>org.hibernate.search</groupId>
+            <artifactId>hibernate-search-backend-lucene</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate.search</groupId>
+            <artifactId>hibernate-search-backend-elasticsearch</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate.search</groupId>
             <artifactId>hibernate-search-engine</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-search-orm</artifactId>
+            <groupId>org.hibernate.search</groupId>
+            <artifactId>hibernate-search-mapper-pojo-base</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate.search</groupId>
+            <artifactId>hibernate-search-mapper-orm-orm6</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate.search</groupId>
+            <artifactId>hibernate-search-mapper-orm-coordination-outbox-polling-orm6</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate.search</groupId>
+            <artifactId>hibernate-search-v5migrationhelper-engine</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate.search</groupId>
+            <artifactId>hibernate-search-v5migrationhelper-orm-orm6</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -243,8 +376,23 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>org.infinispan</groupId>
+            <artifactId>infinispan-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jberet</groupId>
+            <artifactId>jberet-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>org.jboss</groupId>
-            <artifactId>jboss-ejb-client</artifactId>
+            <artifactId>jboss-ejb-client-jakarta</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss</groupId>
+            <artifactId>jboss-transaction-spi-jakarta</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -264,12 +412,42 @@
         </dependency>
         <dependency>
             <groupId>org.jboss.ironjacamar</groupId>
-            <artifactId>ironjacamar-core-impl</artifactId>
+            <artifactId>ironjacamar-common-api-jakarta</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.jboss.ironjacamar</groupId>
-            <artifactId>ironjacamar-jdbc</artifactId>
+            <artifactId>ironjacamar-common-impl-jakarta</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.ironjacamar</groupId>
+            <artifactId>ironjacamar-core-api-jakarta</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.ironjacamar</groupId>
+            <artifactId>ironjacamar-core-impl-jakarta</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.ironjacamar</groupId>
+            <artifactId>ironjacamar-jdbc-jakarta</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.narayana.jts</groupId>
+            <artifactId>narayana-jts-idlj-jakarta</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.narayana.jts</groupId>
+            <artifactId>narayana-jts-integration-jakarta</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.openjdk-orb</groupId>
+            <artifactId>openjdk-orb-jakarta</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -307,6 +485,7 @@
             <artifactId>shrinkwrap-descriptors-impl-javaee</artifactId>
             <scope>test</scope>
         </dependency>
+        <!--
         <dependency>
             <groupId>org.jboss.spec.javax.annotation</groupId>
             <artifactId>jboss-annotations-api_1.3_spec</artifactId>
@@ -347,12 +526,12 @@
             <artifactId>jboss-jaxrs-api_2.1_spec</artifactId>
             <scope>test</scope>
         </dependency>
-        <!-- Required for Java 11 -->
         <dependency>
             <groupId>org.jboss.spec.javax.xml.ws</groupId>
             <artifactId>jboss-jaxws-api_2.3_spec</artifactId>
             <scope>test</scope>
         </dependency>
+        -->
         <dependency>
             <groupId>org.jboss.weld</groupId>
             <artifactId>weld-api</artifactId>
@@ -380,25 +559,36 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>jipijapa-spi</artifactId>
+            <artifactId>jipijapa-spi-jakarta</artifactId>
             <scope>test</scope>
         </dependency>
         <!-- This is not desired, however the Jakarta Connectors tests seem to require this -->
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>wildfly-connector</artifactId>
+            <artifactId>wildfly-connector-jakarta</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <!-- This is not desired, however the HungTasksTerminationTestCase test seems to require this -->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>wildfly-ee-jakarta</artifactId>
             <scope>test</scope>
         </dependency>
         <!-- This is not desired, however the UncheckedStatelessBean requires this -->
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>wildfly-ejb3</artifactId>
+            <artifactId>wildfly-ejb3-jakarta</artifactId>
             <scope>test</scope>
         </dependency>
         <!-- This is required for the JmsTestCase which uses CLI -->
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>wildfly-messaging-activemq-subsystem</artifactId>
+            <artifactId>wildfly-messaging-activemq-subsystem-jakarta</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>wildfly-naming</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -413,23 +603,58 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>wildfly-jaxrs</artifactId>
+            <artifactId>wildfly-jaxrs-jakarta</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>wildfly-batch-jberet</artifactId>
+            <artifactId>wildfly-batch-jberet-jakarta</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>wildfly-jsf</artifactId>
+            <artifactId>wildfly-jsf-jakarta</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>wildfly-undertow-jakarta</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.wildfly</groupId>
+            <artifactId>wildfly-naming-client</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.wildfly.core</groupId>
+            <artifactId>wildfly-cli</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.wildfly.core</groupId>
+            <artifactId>wildfly-model-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.wildfly.core</groupId>
+            <artifactId>wildfly-request-controller</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.wildfly.core</groupId>
+            <artifactId>wildfly-core-testsuite-shared</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.wildfly.transaction</groupId>
+            <artifactId>wildfly-transaction-client-jakarta</artifactId>
             <scope>test</scope>
         </dependency>
         <!-- To be able to start a 'remote' broker -->
         <dependency>
             <groupId>org.apache.activemq</groupId>
-            <artifactId>artemis-jms-server</artifactId>
+            <artifactId>artemis-jakarta-server</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -454,7 +679,7 @@
         </dependency>
         <dependency>
             <groupId>org.apache.activemq</groupId>
-            <artifactId>artemis-ra</artifactId>
+            <artifactId>artemis-jakarta-ra</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -464,7 +689,7 @@
         </dependency>
         <dependency>
             <groupId>org.apache.activemq</groupId>
-            <artifactId>artemis-service-extensions</artifactId>
+            <artifactId>artemis-jakarta-service-extensions</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -546,8 +771,74 @@
         <dependency>
             <groupId>org.testcontainers</groupId>
             <artifactId>testcontainers</artifactId>
-            <version>1.16.0</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>elasticsearch</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Runtime only dependencies that were once available transitively -->
+        <dependency>
+            <groupId>com.sun.faces</groupId>
+            <artifactId>jsf-impl</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.istack</groupId>
+            <artifactId>istack-commons-runtime</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-bindings-soap</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-frontend-simple</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.angus</groupId>
+            <artifactId>angus-activation</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.ironjacamar</groupId>
+            <artifactId>ironjacamar-deployers-common-jakarta</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.spec.jakarta.xml.soap</groupId>
+            <artifactId>jboss-saaj-api_3.0_spec</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.wildfly.discovery</groupId>
+            <artifactId>wildfly-discovery-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.wildfly.wildfly-http-client</groupId>
+            <artifactId>wildfly-http-client-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.wildfly.wildfly-http-client</groupId>
+            <artifactId>wildfly-http-ejb-client-jakarta</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.wildfly.wildfly-http-client</groupId>
+            <artifactId>wildfly-http-naming-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.wildfly.wildfly-http-client</groupId>
+            <artifactId>wildfly-http-transaction-client-jakarta</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>xom</groupId>
+            <artifactId>xom</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>wsdl4j</groupId>
+            <artifactId>wsdl4j</artifactId>
         </dependency>
     </dependencies>
 
@@ -573,6 +864,51 @@
                                     </includes>
                                 </resource>
                             </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <!-- See HibernateSearchOutboxPollingTestCase, HibernateSearchV5MigrationHelperJPATestCase,
+                             HibernateSearchV5MigrationHelperEarMassIndexerTestCase -->
+                        <id>copy-hibernate-search-extra-jars</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>org.hibernate.search</groupId>
+                                    <artifactId>hibernate-search-mapper-orm-coordination-outbox-polling-orm6</artifactId>
+                                    <version>${version.org.hibernate.search}</version>
+                                    <type>jar</type>
+                                    <overWrite>true</overWrite>
+                                    <outputDirectory>${project.build.directory}/testlib</outputDirectory>
+                                    <destFileName>hibernate-search-mapper-orm-coordination-outbox-polling.jar</destFileName>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>org.hibernate.search</groupId>
+                                    <artifactId>hibernate-search-v5migrationhelper-engine</artifactId>
+                                    <version>${version.org.hibernate.search}</version>
+                                    <type>jar</type>
+                                    <overWrite>true</overWrite>
+                                    <outputDirectory>${project.build.directory}/testlib</outputDirectory>
+                                    <destFileName>hibernate-search-v5migrationhelper-engine.jar</destFileName>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>org.hibernate.search</groupId>
+                                    <artifactId>hibernate-search-v5migrationhelper-orm-orm6</artifactId>
+                                    <version>${version.org.hibernate.search}</version>
+                                    <type>jar</type>
+                                    <overWrite>true</overWrite>
+                                    <outputDirectory>${project.build.directory}/testlib</outputDirectory>
+                                    <destFileName>hibernate-search-v5migrationhelper-orm.jar</destFileName>
+                                </artifactItem>
+                            </artifactItems>
                         </configuration>
                     </execution>
                 </executions>
@@ -613,7 +949,7 @@
                             <includes>
                                 <include>**/org/jboss/as/test/integration/weld/extensions/cdiportableextensions/FunExtension.class</include>
                                 <include>**/org/jboss/as/test/integration/weld/extensions/cdiportableextensions/Funny.class</include>
-                                <include>**/META-INF/services/javax.enterprise.inject.spi.Extension</include>
+                                <include>**/META-INF/services/jakarta.enterprise.inject.spi.Extension</include>
                             </includes>
                             <finalName>weldTest</finalName>
                             <classifier>bootableJar</classifier>
@@ -855,6 +1191,7 @@
                             <plugin-options>
                                 <jboss-maven-dist/>
                                 <jboss-fork-embedded>${galleon.fork.embedded}</jboss-fork-embedded>
+                                <jboss-jakarta-transform-artifacts>false</jboss-jakarta-transform-artifacts>
                             </plugin-options>
                             <feature-packs>
                                 <feature-pack>
@@ -889,6 +1226,7 @@
                             <plugin-options>
                                 <jboss-maven-dist/>
                                 <jboss-fork-embedded>${galleon.fork.embedded}</jboss-fork-embedded>
+                                <jboss-jakarta-transform-artifacts>false</jboss-jakarta-transform-artifacts>
                             </plugin-options>
                             <feature-packs>
                                 <feature-pack>
@@ -919,6 +1257,7 @@
                         <!-- Narayana transaction data storage for transaction started at client side -->
                         <ObjectStoreEnvironmentBean.objectStoreDir>target/NarayanaObjectStore</ObjectStoreEnvironmentBean.objectStoreDir>
                         <ObjectStoreEnvironmentBean.communicationStore.objectStoreDir>target/NarayanaObjectStore</ObjectStoreEnvironmentBean.communicationStore.objectStoreDir>
+                        <server.jvm.args>${server.jvm.args} -Dorg.wildfly.unsupported.skip.jakarta.transformer=true</server.jvm.args>
                     </systemPropertyVariables>
                 </configuration>
                 <executions>
@@ -935,7 +1274,6 @@
                             <environmentVariables>
                                 <JBOSS_HOME>${jboss.dist}</JBOSS_HOME>
                             </environmentVariables>
-                            <redirectTestOutputToFile>true</redirectTestOutputToFile>
                             <includes>
                                 <include>org/jboss/as/test/integration/beanvalidation/**/*TestCase.java</include>
                                 <include>org/jboss/as/test/integration/beanvalidation/**/*Test.java</include>
@@ -1264,7 +1602,6 @@
                                 </goals>
                                 <configuration>
                                     <skipTests>${ts.skipTests}</skipTests>
-                                    <redirectTestOutputToFile>${testLogToFile}</redirectTestOutputToFile>
                                     <enableAssertions>true</enableAssertions>
                                     <includes>
                                         <include>org/jboss/as/test/integration/**/*SecondTestCase.java</include>
@@ -1341,7 +1678,6 @@
                                     <goal>test</goal>
                                 </goals>
                                 <configuration>
-                                    <redirectTestOutputToFile>false</redirectTestOutputToFile>
                                     <systemPropertyVariables combine.children="append">
                                         <jboss.server.config.file.name>standalone-full.xml</jboss.server.config.file.name>
                                         <!-- EJB client library hack, see WFLY-4973-->
@@ -1400,49 +1736,6 @@
                             </executions>
                         </plugin>
                     </plugins>
-            </build>
-        </profile>
-
-        <!-- IIOP/CORBA stub generation - manual stub generation for IBM JDK -->
-        <profile>
-            <id>ibmjdk.profile</id>
-            <activation>
-                <property>
-                    <name>java.vendor</name>
-                    <value>IBM Corporation</value>
-                </property>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>exec-maven-plugin</artifactId>
-                        <executions>
-                            <!-- There is no similar option as -Dcom.sun.CORBA.ORBUseDynamicStub=true for IBM JDK
-                            we need to create stub do it manually with rmic tools -->
-                            <execution>
-                                <id>ibmjdk.iiop.stub-creation</id>
-                                <phase>test-compile</phase>
-                                <goals>
-                                    <goal>exec</goal>
-                                </goals>
-                                <configuration>
-                                    <executable>rmic</executable>
-                                    <workingDirectory>target/test-classes</workingDirectory>
-                                    <arguments>
-                                        <argument>-iiop</argument>
-                                        <argument>-classpath</argument>
-                                        <argument>${jboss.dist}/bin/client/jboss-client.jar:.</argument>
-                                        <argument>org.jboss.as.test.integration.ejb.iiop.naming.IIOPNamingHome
-                                        </argument>
-                                        <argument>org.jboss.as.test.integration.ejb.iiop.naming.IIOPStatefulNamingHome
-                                        </argument>
-                                    </arguments>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
             </build>
         </profile>
 
@@ -1515,25 +1808,10 @@
             </activation>
             <properties>
                 <jboss.dist>${project.build.directory}/wildfly</jboss.dist>
+                <extra.server.jvm.args>-Dmaven.repo.local=${settings.localRepository}</extra.server.jvm.args>
             </properties>
             <build>
                 <plugins>
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>exec-maven-plugin</artifactId>
-                        <version>${version.exec.plugin}</version>
-                        <executions>
-                            <!-- See the default execution on the ibmjdk.profile, this execution should be activated selectively
-                                 for any provisioning under this profile that requires the manual IIOP/CORBA stub generation -->
-                            <execution>
-                                <id>ibmjdk.iiop.stub-creation</id>
-                                <phase>none</phase>
-                                <goals>
-                                    <goal>exec</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
                     <!-- Disable the standard copy-based provisioning -->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
@@ -1625,6 +1903,7 @@
                                         <jboss-maven-dist/>
                                         <jboss-fork-embedded>${galleon.fork.embedded}</jboss-fork-embedded>
                                         <optional-packages>passive+</optional-packages>
+                                        <jboss-jakarta-transform-artifacts>false</jboss-jakarta-transform-artifacts>
                                     </plugin-options>
                                     <feature-packs>
                                         <feature-pack>
@@ -1664,6 +1943,7 @@
                                         <jboss-maven-dist/>
                                         <jboss-fork-embedded>${galleon.fork.embedded}</jboss-fork-embedded>
                                         <optional-packages>passive+</optional-packages>
+                                        <jboss-jakarta-transform-artifacts>false</jboss-jakarta-transform-artifacts>
                                     </plugin-options>
                                     <feature-packs>
                                         <feature-pack>
@@ -1703,6 +1983,7 @@
                                         <jboss-maven-dist/>
                                         <jboss-fork-embedded>${galleon.fork.embedded}</jboss-fork-embedded>
                                         <optional-packages>passive+</optional-packages>
+                                        <jboss-jakarta-transform-artifacts>false</jboss-jakarta-transform-artifacts>
                                     </plugin-options>
                                     <feature-packs>
                                         <feature-pack>
@@ -1743,6 +2024,7 @@
                                         <jboss-maven-dist/>
                                         <jboss-fork-embedded>${galleon.fork.embedded}</jboss-fork-embedded>
                                         <optional-packages>passive+</optional-packages>
+                                        <jboss-jakarta-transform-artifacts>false</jboss-jakarta-transform-artifacts>
                                     </plugin-options>
                                     <feature-packs>
                                         <feature-pack>
@@ -1783,6 +2065,7 @@
                                         <jboss-maven-dist/>
                                         <jboss-fork-embedded>${galleon.fork.embedded}</jboss-fork-embedded>
                                         <optional-packages>passive+</optional-packages>
+                                        <jboss-jakarta-transform-artifacts>false</jboss-jakarta-transform-artifacts>
                                     </plugin-options>
                                     <feature-packs>
                                         <feature-pack>
@@ -1827,6 +2110,7 @@
                                         <jboss-maven-dist/>
                                         <jboss-fork-embedded>${galleon.fork.embedded}</jboss-fork-embedded>
                                         <optional-packages>passive+</optional-packages>
+                                        <jboss-jakarta-transform-artifacts>false</jboss-jakarta-transform-artifacts>
                                     </plugin-options>
                                     <feature-packs>
                                         <feature-pack>
@@ -1866,6 +2150,7 @@
                                         <jboss-maven-dist/>
                                         <jboss-fork-embedded>${galleon.fork.embedded}</jboss-fork-embedded>
                                         <optional-packages>passive+</optional-packages>
+                                        <jboss-jakarta-transform-artifacts>false</jboss-jakarta-transform-artifacts>
                                     </plugin-options>
                                     <feature-packs>
                                         <feature-pack>
@@ -1908,6 +2193,7 @@
                                         <jboss-maven-dist/>
                                         <jboss-fork-embedded>${galleon.fork.embedded}</jboss-fork-embedded>
                                         <optional-packages>passive+</optional-packages>
+                                        <jboss-jakarta-transform-artifacts>false</jboss-jakarta-transform-artifacts>
                                     </plugin-options>
                                     <feature-packs>
                                         <feature-pack>
@@ -1947,6 +2233,7 @@
                                         <jboss-maven-dist/>
                                         <jboss-fork-embedded>${galleon.fork.embedded}</jboss-fork-embedded>
                                         <optional-packages>passive+</optional-packages>
+                                        <jboss-jakarta-transform-artifacts>false</jboss-jakarta-transform-artifacts>
                                     </plugin-options>
                                     <feature-packs>
                                         <feature-pack>
@@ -1988,6 +2275,7 @@
                                         <jboss-maven-dist/>
                                         <jboss-fork-embedded>${galleon.fork.embedded}</jboss-fork-embedded>
                                         <optional-packages>passive+</optional-packages>
+                                        <jboss-jakarta-transform-artifacts>false</jboss-jakarta-transform-artifacts>
                                     </plugin-options>
                                     <feature-packs>
                                         <feature-pack>
@@ -2029,6 +2317,7 @@
                                         <jboss-maven-dist/>
                                         <jboss-fork-embedded>${galleon.fork.embedded}</jboss-fork-embedded>
                                         <optional-packages>passive+</optional-packages>
+                                        <jboss-jakarta-transform-artifacts>false</jboss-jakarta-transform-artifacts>
                                     </plugin-options>
                                     <feature-packs>
                                         <feature-pack>
@@ -2071,6 +2360,7 @@
                                         <jboss-maven-dist/>
                                         <jboss-fork-embedded>${galleon.fork.embedded}</jboss-fork-embedded>
                                         <optional-packages>passive+</optional-packages>
+                                        <jboss-jakarta-transform-artifacts>false</jboss-jakarta-transform-artifacts>
                                     </plugin-options>
                                     <feature-packs>
                                         <feature-pack>
@@ -2111,6 +2401,7 @@
                                         <jboss-maven-dist/>
                                         <jboss-fork-embedded>${galleon.fork.embedded}</jboss-fork-embedded>
                                         <optional-packages>passive+</optional-packages>
+                                        <jboss-jakarta-transform-artifacts>false</jboss-jakarta-transform-artifacts>
                                     </plugin-options>
                                     <feature-packs>
                                         <feature-pack>
@@ -2151,6 +2442,7 @@
                                         <jboss-maven-dist/>
                                         <jboss-fork-embedded>${galleon.fork.embedded}</jboss-fork-embedded>
                                         <optional-packages>passive+</optional-packages>
+                                        <jboss-jakarta-transform-artifacts>false</jboss-jakarta-transform-artifacts>
                                     </plugin-options>
                                     <feature-packs>
                                         <feature-pack>
@@ -2191,6 +2483,7 @@
                                         <jboss-maven-dist/>
                                         <jboss-fork-embedded>${galleon.fork.embedded}</jboss-fork-embedded>
                                         <optional-packages>passive+</optional-packages>
+                                        <jboss-jakarta-transform-artifacts>false</jboss-jakarta-transform-artifacts>
                                     </plugin-options>
                                     <feature-packs>
                                         <feature-pack>
@@ -2230,6 +2523,7 @@
                                         <jboss-maven-dist/>
                                         <jboss-fork-embedded>${galleon.fork.embedded}</jboss-fork-embedded>
                                         <optional-packages>passive+</optional-packages>
+                                        <jboss-jakarta-transform-artifacts>false</jboss-jakarta-transform-artifacts>
                                     </plugin-options>
                                     <feature-packs>
                                         <feature-pack>
@@ -2270,6 +2564,7 @@
                                         <jboss-maven-dist/>
                                         <jboss-fork-embedded>${galleon.fork.embedded}</jboss-fork-embedded>
                                         <optional-packages>passive+</optional-packages>
+                                        <jboss-jakarta-transform-artifacts>false</jboss-jakarta-transform-artifacts>
                                     </plugin-options>
                                     <feature-packs>
                                         <feature-pack>
@@ -2309,6 +2604,7 @@
                                         <jboss-maven-dist/>
                                         <jboss-fork-embedded>${galleon.fork.embedded}</jboss-fork-embedded>
                                         <optional-packages>passive+</optional-packages>
+                                        <jboss-jakarta-transform-artifacts>false</jboss-jakarta-transform-artifacts>
                                     </plugin-options>
                                     <feature-packs>
                                         <feature-pack>
@@ -2348,6 +2644,7 @@
                                         <jboss-maven-dist/>
                                         <jboss-fork-embedded>${galleon.fork.embedded}</jboss-fork-embedded>
                                         <optional-packages>passive+</optional-packages>
+                                        <jboss-jakarta-transform-artifacts>false</jboss-jakarta-transform-artifacts>
                                     </plugin-options>
                                     <feature-packs>
                                         <feature-pack>
@@ -2416,7 +2713,6 @@
                                     <environmentVariables>
                                         <JBOSS_HOME>${project.build.directory}/wildfly-batch</JBOSS_HOME>
                                     </environmentVariables>
-                                    <redirectTestOutputToFile>${testLogToFile}</redirectTestOutputToFile>
                                     <includes>
                                         <include>org/jboss/as/test/integration/batch/**/*TestCase.java</include>
                                     </includes>
@@ -2447,7 +2743,6 @@
                                     <environmentVariables>
                                         <JBOSS_HOME>${project.build.directory}/wildfly-jsf</JBOSS_HOME>
                                     </environmentVariables>
-                                    <redirectTestOutputToFile>${testLogToFile}</redirectTestOutputToFile>
                                     <includes>
                                         <include>org/jboss/as/test/integration/jsf/**/*TestCase.java</include>
                                         <include>org/jboss/as/test/integration/jsf/**/*Test.java</include>
@@ -2480,7 +2775,6 @@
                                     <environmentVariables>
                                         <JBOSS_HOME>${project.build.directory}/wildfly-jsf-ejb-lite</JBOSS_HOME>
                                     </environmentVariables>
-                                    <redirectTestOutputToFile>${testLogToFile}</redirectTestOutputToFile>
                                     <includes>
                                         <include>org/jboss/as/test/integration/jsf/phaselistener/injectiontarget/InjectionToPhaseListenerTest.java</include>
                                         <include>org/jboss/as/test/integration/jsf/version/JSFDeploymentProcessorTestCase.java</include>
@@ -2508,7 +2802,6 @@
                                     <environmentVariables>
                                         <JBOSS_HOME>${project.build.directory}/wildfly-jdr</JBOSS_HOME>
                                     </environmentVariables>
-                                    <redirectTestOutputToFile>${testLogToFile}</redirectTestOutputToFile>
                                     <includes>
                                         <include>org/jboss/as/test/integration/jdr/mgmt/*TestCase.java</include>
                                     </includes>
@@ -2535,7 +2828,6 @@
                                     <environmentVariables>
                                         <JBOSS_HOME>${project.build.directory}/wildfly-jsonp</JBOSS_HOME>
                                     </environmentVariables>
-                                    <redirectTestOutputToFile>${testLogToFile}</redirectTestOutputToFile>
                                     <includes>
                                         <include>org/jboss/as/test/integration/json/*TestCase.java</include>
                                     </includes>
@@ -2565,7 +2857,6 @@
                                     <environmentVariables>
                                         <JBOSS_HOME>${project.build.directory}/wildfly-jsonb</JBOSS_HOME>
                                     </environmentVariables>
-                                    <redirectTestOutputToFile>${testLogToFile}</redirectTestOutputToFile>
                                     <includes>
                                         <include>org/jboss/as/test/integration/json/*TestCase.java</include>
                                     </includes>
@@ -2594,7 +2885,6 @@
                                         <MPCONFIG_TEST_ENV_VAR>integ-basicmpconfig-test-env-var-value</MPCONFIG_TEST_ENV_VAR>
                                         <TEST_PROP>JMXPropertyEditorsTestCase-WFLY-12899</TEST_PROP>
                                     </environmentVariables>
-                                    <redirectTestOutputToFile>${testLogToFile}</redirectTestOutputToFile>
                                     <includes>
                                         <include>org/wildfly/test/integration/microprofile/**/*TestCase.java</include>
                                     </includes>
@@ -2650,7 +2940,6 @@
                                     <environmentVariables>
                                         <JBOSS_HOME>${project.build.directory}/wildfly-legacy-sar</JBOSS_HOME>
                                     </environmentVariables>
-                                    <redirectTestOutputToFile>${testLogToFile}</redirectTestOutputToFile>
                                     <includes>
                                         <!-- SarResourceInjectionTestCase needs mail -->
                                         <include>org/jboss/as/test/integration/sar/**/*TestCase.java</include>
@@ -2683,7 +2972,6 @@
                                     <additionalClasspathElements>
                                         <additionalClasspathElement>${project.basedir}/../src/test/resources</additionalClasspathElement>
                                     </additionalClasspathElements>
-                                    <redirectTestOutputToFile>${testLogToFile}</redirectTestOutputToFile>
                                     <includes>
                                         <include>org/jboss/as/test/integration/ejb/annotationprocessing/ResourceAnnotationsProcessingTestCase.java</include>
                                         <include>org/jboss/as/test/integration/ejb/bridgemethods/EjbBridgeMethodsTestCase.java</include>
@@ -2796,7 +3084,6 @@
                                     <additionalClasspathElements>
                                         <additionalClasspathElement>${project.basedir}/../src/test/resources</additionalClasspathElement>
                                     </additionalClasspathElements>
-                                    <redirectTestOutputToFile>${testLogToFile}</redirectTestOutputToFile>
                                     <includes>
                                         <include>org/jboss/as/test/integration/ejb/**/*TestCase.java</include>
                                     </includes>
@@ -2859,7 +3146,6 @@
                                     <environmentVariables>
                                         <JBOSS_HOME>${project.build.directory}/wildfly-jpa</JBOSS_HOME>
                                     </environmentVariables>
-                                    <redirectTestOutputToFile>${testLogToFile}</redirectTestOutputToFile>
                                     <includes>
                                         <include>org/jboss/as/test/integration/weld/jpa/*TestCase.java</include>
                                         <!-- NonTransactionalEmTestCase is currently the only test that does not need EJB -->
@@ -2889,7 +3175,6 @@
                                     <environmentVariables>
                                         <JBOSS_HOME>${project.build.directory}/wildfly-ejb-embedded-broker</JBOSS_HOME>
                                     </environmentVariables>
-                                    <redirectTestOutputToFile>true</redirectTestOutputToFile>
                                     <includes>
                                         <include>org/jboss/as/test/integration/ejb/mdb/**/*TestCase.java</include>
                                         <include>org/jboss/as/test/integration/messaging/**/*TestCase.java</include>
@@ -2918,7 +3203,6 @@
                                     <environmentVariables>
                                         <JBOSS_HOME>${project.build.directory}/wildfly-ejb-remote-broker</JBOSS_HOME>
                                     </environmentVariables>
-                                    <redirectTestOutputToFile>true</redirectTestOutputToFile>
                                     <includes>
                                         <include>org/jboss/as/test/integration/ejb/mdb/**/*TestCase.java</include>
                                         <include>org/jboss/as/test/integration/messaging/**/*TestCase.java</include>
@@ -2965,7 +3249,6 @@
                                     <environmentVariables>
                                         <JBOSS_HOME>${project.build.directory}/wildfly-mail</JBOSS_HOME>
                                     </environmentVariables>
-                                    <redirectTestOutputToFile>${testLogToFile}</redirectTestOutputToFile>
                                     <includes>
                                         <include>org/jboss/as/test/integration/mail/annotation/*TestCase.java</include>
                                     </includes>
@@ -2996,7 +3279,6 @@
                                     <environmentVariables>
                                         <JBOSS_HOME>${project.build.directory}/wildfly-mail-ejb</JBOSS_HOME>
                                     </environmentVariables>
-                                    <redirectTestOutputToFile>${testLogToFile}</redirectTestOutputToFile>
                                     <includes>
                                         <include>org/jboss/as/test/integration/mail/annotation/MailSessionDefinitionAnnotationTest.java</include>
                                         <include>org/jboss/as/test/integration/ee/injection/resource/mail/*TestCase.java</include>
@@ -3024,7 +3306,6 @@
                                     <environmentVariables>
                                         <JBOSS_HOME>${project.build.directory}/wildfly-pojo</JBOSS_HOME>
                                     </environmentVariables>
-                                    <redirectTestOutputToFile>${testLogToFile}</redirectTestOutputToFile>
                                     <includes>
                                         <include>org/jboss/as/test/integration/pojo/**/*TestCase.java</include>
                                     </includes>
@@ -3051,7 +3332,6 @@
                                     <environmentVariables>
                                         <JBOSS_HOME>${project.build.directory}/wildfly-web-console</JBOSS_HOME>
                                     </environmentVariables>
-                                    <redirectTestOutputToFile>${testLogToFile}</redirectTestOutputToFile>
                                     <includes>
                                         <!-- notice HttpManagementConstantHeadersTestCase#testHeadersOverrideNonManagementEndpoint will be ignored because the provisioning don't configure metrics -->
                                         <include>org/jboss/as/test/integration/management/console/*TestCase.java</include>
@@ -3079,7 +3359,6 @@
                                     <environmentVariables>
                                         <JBOSS_HOME>${project.build.directory}/wildfly-web-console-cloud</JBOSS_HOME>
                                     </environmentVariables>
-                                    <redirectTestOutputToFile>${testLogToFile}</redirectTestOutputToFile>
                                     <includes>
                                         <include>org/jboss/as/test/integration/management/console/*TestCase.java</include>
                                     </includes>
@@ -3190,7 +3469,6 @@
                                         <bootable.jar>${project.build.directory}/test-wildfly-cloud-profile.jar</bootable.jar>
                                         <arquillian.xml>arquillian-bootable.xml</arquillian.xml>
                                     </systemPropertyVariables>
-                                    <redirectTestOutputToFile>${testLogToFile}</redirectTestOutputToFile>
                                     <classpathDependencyExcludes>
                                         <classpathDependencyExclude>
                                             org.wildfly.arquillian:wildfly-arquillian-container-managed
@@ -3219,7 +3497,6 @@
                                         <bootable.jar>${project.build.directory}/test-wildfly-jpa.jar</bootable.jar>
                                         <arquillian.xml>arquillian-bootable.xml</arquillian.xml>
                                     </systemPropertyVariables>
-                                    <redirectTestOutputToFile>${testLogToFile}</redirectTestOutputToFile>
                                     <includes>
                                         <include>org/jboss/as/test/integration/weld/jpa/*TestCase.java</include>
                                         <!-- NonTransactionalEmTestCase is currently the only test that does not need EJB -->
@@ -3245,7 +3522,7 @@
             <id>bootablejar.ee9.profile</id>
             <activation>
                 <property>
-                    <name>ts.bootable.ee9</name>
+                    <name>DISABLED.ts.bootable.ee9</name>
                 </property>
             </activation>
             <dependencies>
@@ -3259,7 +3536,7 @@
                 <bootable-jar-maven-jar-plugin.create.modules.phase>process-test-classes</bootable-jar-maven-jar-plugin.create.modules.phase>
                 <bootable-jar-jpa-packaging.phase>process-test-classes</bootable-jar-jpa-packaging.phase>
                 <bootable-jar-cloud-profile-packaging.phase>process-test-classes</bootable-jar-cloud-profile-packaging.phase>
-                <extra.server.jvm.args>-Dmaven.repo.local=${wildfly.transformed.repo.dir}</extra.server.jvm.args>
+                <extra.server.jvm.args>-Dmaven.repo.local=${settings.localRepository}</extra.server.jvm.args>
             </properties>
             <build>
                 <plugins>
@@ -3272,7 +3549,6 @@
                                 <configuration>
                                     <plugin-options combine-children="append">
                                         <jboss-jakarta-transform-artifacts>false</jboss-jakarta-transform-artifacts>
-                                        <jboss-maven-provisioning-repo>${wildfly.transformed.repo.dir}</jboss-maven-provisioning-repo>
                                     </plugin-options>
                                 </configuration>
                             </execution>
@@ -3281,7 +3557,6 @@
                                 <configuration>
                                     <plugin-options combine-children="append">
                                         <jboss-jakarta-transform-artifacts>false</jboss-jakarta-transform-artifacts>
-                                        <jboss-maven-provisioning-repo>${wildfly.transformed.repo.dir}</jboss-maven-provisioning-repo>
                                     </plugin-options>
                                 </configuration>
                             </execution>
@@ -3359,7 +3634,6 @@
                                         <bootable.jar>${project.build.directory}/test-wildfly-cloud-profile.jar</bootable.jar>
                                         <arquillian.xml>arquillian-bootable.xml</arquillian.xml>
                                     </systemPropertyVariables>
-                                    <redirectTestOutputToFile>${testLogToFile}</redirectTestOutputToFile>
                                     <classpathDependencyExcludes>
                                         <classpathDependencyExclude>
                                             org.wildfly.arquillian:wildfly-arquillian-container-managed
@@ -3395,7 +3669,6 @@
                                         <bootable.jar>${project.build.directory}/test-wildfly-jpa.jar</bootable.jar>
                                         <arquillian.xml>arquillian-bootable.xml</arquillian.xml>
                                     </systemPropertyVariables>
-                                    <redirectTestOutputToFile>${testLogToFile}</redirectTestOutputToFile>
                                     <includes>
                                         <include>org/jboss/as/test/integration/weld/jpa/*TestCase.java</include>
                                         <!-- NonTransactionalEmTestCase is currently the only test that does not need EJB -->
@@ -3421,7 +3694,7 @@
             <id>ee9.test.profile</id>
             <activation>
                 <property>
-                    <name>ts.ee9</name>
+                    <name>DISABLED.ts.ee9</name>
                 </property>
             </activation>
             <build>
@@ -3460,13 +3733,6 @@
                                         <!-- Requires the Arquillian Servlet 3.0 protocol to be overridden to Servlet 5.0 -->
                                         <exclude>org/jboss/as/test/integration/logging/config/LoggingProfileSharedTestCase.java</exclude>
 
-                                        <!-- With EE9, we use Hibernate Search 6 instead of 5,
-                                             and Hibernate Search 6 exposes a different (backwards-incompatible) API,
-                                             so Hibernate Search 5 tests cannot work.
-                                             The testsuite/preview/basic modules contains a copy of each test,
-                                             adapted to rely on Hibernate Search 6 APIs,
-                                             so we still test Hibernate Search with EE9. -->
-                                        <exclude>org/jboss/as/test/integration/hibernate/search/**</exclude>
                                         <!-- Differences in the API changes for EE 8/9 and EE 10. -->
                                         <exclude>org/jboss/as/test/integration/jaxb/unit/JAXBContextUsingPropertiesTestCase.java</exclude>
                                         <exclude>org/jboss/as/test/integration/jaxb/unit/JAXBContextUsingServicesTestCase.java</exclude>
@@ -3540,7 +3806,6 @@
                                         <exclude>org/jboss/as/test/integration/jsf/beanvalidation/cdi/BeanValidationCdiIntegrationTestCase.java</exclude>
                                         <exclude>org/jboss/as/test/integration/jsf/doctype/DoctypeDeclTestCase.java</exclude>
                                         <exclude>org/jboss/as/test/integration/jsf/jsf23/JSF23SanityTestCase.java</exclude>
-                                        <exclude>org/jboss/as/test/integration/jsf/testurl/ForbiddenUrlTestCase.java</exclude>
                                         <exclude>org/jboss/as/test/integration/management/deploy/runtime/JaxrsRuntimeNameTestCase.java</exclude><!-- test expects javax strings in mgmt api responses -->
                                         <exclude>org/jboss/as/test/integration/weld/ejb/SessionObjectReferenceTestCase.java</exclude>
                                         <exclude>org/wildfly/test/integration/web/annotationsmodule/EarModuleDeploymentTestCase.java</exclude>

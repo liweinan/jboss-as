@@ -25,7 +25,7 @@
         Maintain separation between the artifact id and the version to help prevent
         merge conflicts between commits changing the GA and those changing the V.
         -->
-        <version>27.0.0.Alpha2-SNAPSHOT</version>
+        <version>27.0.0.Alpha4-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -45,6 +45,11 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>wildfly-testsuite-shared</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.wildfly.core</groupId>
+            <artifactId>wildfly-controller-client</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -105,7 +110,6 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
                     <failIfNoTests>false</failIfNoTests>
-                    <redirectTestOutputToFile>${testLogToFile}</redirectTestOutputToFile>
                     <reuseForks>true</reuseForks>
 
                     <systemPropertyVariables>
@@ -143,12 +147,6 @@
                                     <goal>provision</goal>
                                 </goals>
                                 <phase>generate-resources</phase>
-                                <configuration>
-                                    <plugin-options combine.self="append">
-                                        <jboss-jakarta-transform-artifacts>false</jboss-jakarta-transform-artifacts>
-                                        <jboss-maven-provisioning-repo>${wildfly.transformed.repo.dir}</jboss-maven-provisioning-repo>
-                                    </plugin-options>
-                                </configuration>
                             </execution>
                         </executions>
                     </plugin>
@@ -162,7 +160,7 @@
                                 <phase>test</phase>
                                 <configuration>
                                     <systemPropertyVariables>
-                                        <maven.repo.local>${wildfly.transformed.repo.dir}</maven.repo.local>
+                                        <maven.repo.local>${settings.localRepository}</maven.repo.local>
                                     </systemPropertyVariables>
                                 </configuration>
                             </execution>

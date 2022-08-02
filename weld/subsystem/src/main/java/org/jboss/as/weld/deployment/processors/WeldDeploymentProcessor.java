@@ -163,8 +163,13 @@ public class WeldDeploymentProcessor implements DeploymentUnitProcessor {
 
         final ServiceLoader<DeploymentUnitDependenciesProvider> dependenciesProviders = ServiceLoader.load(DeploymentUnitDependenciesProvider.class,
                 WildFlySecurityManager.getClassLoaderPrivileged(WeldDeploymentProcessor.class));
-        final ServiceLoader<ModuleServicesProvider> moduleServicesProviders = ServiceLoader.load(ModuleServicesProvider.class,
-                WildFlySecurityManager.getClassLoaderPrivileged(WeldDeploymentProcessor.class));
+        List<ClassLoader> loaders = new ArrayList<>(subDeployments.size() + 2);
+        loaders.add(WildFlySecurityManager.getClassLoaderPrivileged(WeldDeploymentProcessor.class));
+        loaders.add(module.getClassLoader());
+        for (DeploymentUnit subDeployment : subDeployments) {
+            loaders.add(subDeployment.getAttachment(Attachments.MODULE).getClassLoader());
+        }
+        Iterable<ModuleServicesProvider> moduleServicesProviders = ServiceLoader.load(ModuleServicesProvider.class, new CompositeClassLoader(loaders));
 
         getDependencies(deploymentUnit, dependencies, dependenciesProviders);
 
