@@ -346,8 +346,7 @@
         <version.io.reactivex.rxjava2>2.2.21</version.io.reactivex.rxjava2>
         <version.io.reactivex.rxjava3>3.1.4</version.io.reactivex.rxjava3>
         <version.io.rest-assured>3.0.6</version.io.rest-assured>
-        <legacy.version.io.smallrye.open-api>2.1.23</legacy.version.io.smallrye.open-api>
-        <version.io.smallrye.open-api>3.0.0-RC2</version.io.smallrye.open-api>
+        <version.io.smallrye.open-api>3.0.0-RC3</version.io.smallrye.open-api>
         <legacy.version.io.smallrye.opentracing>2.0.0</legacy.version.io.smallrye.opentracing>
         <version.io.smallrye.reactive-utils>2.6.0</version.io.smallrye.reactive-utils>
         <legacy.version.io.smallrye.smallrye-common>1.12.0</legacy.version.io.smallrye.smallrye-common>
@@ -460,7 +459,6 @@
         <version.org.eclipse.microprofile.jwt.api>2.0</version.org.eclipse.microprofile.jwt.api>
         <legacy.version.org.eclipse.microprofile.metrics.api>3.0</legacy.version.org.eclipse.microprofile.metrics.api>
         <version.org.eclipse.microprofile.metrics.api>4.0</version.org.eclipse.microprofile.metrics.api>
-        <legacy.version.org.eclipse.microprofile.openapi>2.0.1</legacy.version.org.eclipse.microprofile.openapi>
         <version.org.eclipse.microprofile.openapi>3.0</version.org.eclipse.microprofile.openapi>
         <legacy.version.org.eclipse.microprofile.opentracing>2.0</legacy.version.org.eclipse.microprofile.opentracing>
         <version.org.eclipse.microprofile.opentracing>3.0</version.org.eclipse.microprofile.opentracing>
@@ -494,7 +492,7 @@
         <version.org.hibernate.commons.annotations>6.0.1.Final</version.org.hibernate.commons.annotations>
         <version.org.hibernate.search>6.1.5.Final</version.org.hibernate.search>
         <legacy.version.org.hibernate.validator>6.0.23.Final</legacy.version.org.hibernate.validator>
-        <version.org.hibernate.validator>8.0.0.CR2</version.org.hibernate.validator>
+        <version.org.hibernate.validator>8.0.0.CR3</version.org.hibernate.validator>
         <version.org.hornetq>2.4.9.Final</version.org.hornetq>
         <version.org.infinispan>13.0.10.Final</version.org.infinispan>
         <version.org.infinispan.protostream>4.4.3.Final</version.org.infinispan.protostream>
@@ -523,7 +521,7 @@
         <legacy.version.org.jboss.resteasy>4.7.4.Final</legacy.version.org.jboss.resteasy>
         <version.org.jboss.resteasy>6.1.0.Final</version.org.jboss.resteasy>
         <version.org.jboss.resteasy.microprofile>2.0.0.Beta1</version.org.jboss.resteasy.microprofile>
-        <version.org.jboss.resteasy.spring>3.0.0.Alpha3</version.org.jboss.resteasy.spring>
+        <version.org.jboss.resteasy.spring>3.0.0.Beta1</version.org.jboss.resteasy.spring>
         <version.org.jboss.resteasy.extensions>2.0.0.Alpha1</version.org.jboss.resteasy.extensions>
         <version.org.jboss.seam.int>7.0.0.GA</version.org.jboss.seam.int>
         <!-- only needed here until wildfly-arquillian has this version properly synced with arquillian itslef  -->
